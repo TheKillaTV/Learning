@@ -1,3 +1,7 @@
+/* You pick a number that's between 1 and 10, and the, "computer" keeps
+picking a number from 1 to 10. Once it guesses your number. it'll print
+how many tries it took for the, "computer" to guess your number. */
+
 #include <ctime>
 #include <iostream>
 #include <cstdlib>
