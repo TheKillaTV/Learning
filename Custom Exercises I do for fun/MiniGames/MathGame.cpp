@@ -24,8 +24,8 @@ int main()
     srand( time( NULL ) );
 
     int Type, ADDITION = 0, SUBTRACTION = 1, MULTIPLICATION = 2, DIVISION = 3;
-    int i, j, start, generator, high = 10, low = 1, problemcount = -1, answer, useranswer, incorrectcount = 0, correctcount = 0, bot = 1, top = 3;
-    int firstnumber =  PickRandomNumber(high, low), secondnumber = PickRandomNumber(high, low), chance = ReverseOrderChance(top, bot);
+    int i, start, generator, high = 10, low = 1, problemcount = -1, answer, useranswer, incorrectcount = 0, correctcount = 0, bot = 1, top = 3;
+    int firstnumber = PickRandomNumber(high, low), secondnumber = PickRandomNumber(high, low), chance = ReverseOrderChance(top, bot);
 
     cout << "Welcome to the Math mini game. A random number will be picked between the values you enter." << endl;
     cout << endl;
