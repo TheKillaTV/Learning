@@ -22,10 +22,11 @@ int main()
     cout << "Guess a number between 1 and 10." << endl;
     cin >> guess;
 
-    for (i = 0; i < 1; i++)
+    /*for (i = 0; i < 1; i++)
     {
         answer;
     }
+    */
 
    do
    {
