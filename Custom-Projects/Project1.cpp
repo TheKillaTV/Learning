@@ -122,7 +122,7 @@ void DisplayMenuOptions()
             }
             else if(option == 3)
             {
-                cout << endl;
+                RunningTotalAgain();
             }
             else if(option == 4)
             {
