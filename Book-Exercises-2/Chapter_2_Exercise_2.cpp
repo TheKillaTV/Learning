@@ -5,7 +5,7 @@
 *  in inches to your height in meters by multiplying by 0.0254.Then convert your
 *  weight in pounds into your mass in kilograms by dividing by 2.2. Finally, compute
 *  your BMI by dividing your mass in kilograms by the square of your height in meters.
-*/
+*/ 
 
 #include <iostream>
 
