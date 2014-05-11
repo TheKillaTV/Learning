@@ -2,7 +2,7 @@
 
 What is your first name? Betty Sue
 What is your last name? Yewe
-What letter grade did you receive? B
+What letter grade did you receive? C
 What is your age? 22
 
 Name: Yewe, Betty Sue
