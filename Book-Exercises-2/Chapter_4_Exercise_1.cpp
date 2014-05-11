@@ -13,6 +13,7 @@ Age: 22
 
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
