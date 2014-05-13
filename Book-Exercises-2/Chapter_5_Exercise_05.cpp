@@ -16,7 +16,7 @@ using namespace std;
 int main()
 {
     int months[12];
-    string monthsname[12] = {"Janurary", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    string monthsname[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     int total = 0;
 
     for(int i = 0; i < 12; i++)
