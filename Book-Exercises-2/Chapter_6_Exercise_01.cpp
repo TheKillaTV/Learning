@@ -12,7 +12,7 @@ int main()
 {
     char input;
 
-    cout << "Enter a word: ";
+    cout << "Enter a letter: ";
     cin.get(input);
 
     while(input != '@')
