@@ -37,14 +37,14 @@ int main()
 
     cin >> choice;
 
-    if (choice != 'a' && choice != 'A' && choice != 'b' && choice != 'B' && choice != 'c' && choice != 'C' && choice != 'c' && choice != 'D' && choice != 'd')
+    if (choice != 'a' && choice != 'A' && choice != 'b' && choice != 'B' && choice != 'C' && choice != 'c' && choice != 'D' && choice != 'd')
     {
         do
         {
             cout << "Please enter A, B, C, or D: ";
             cin >> choice;
 
-        } while (choice != 'a' && choice != 'A' && choice != 'b' && choice != 'B' && choice != 'c' && choice != 'C' && choice != 'c' && choice != 'D' && choice != 'd');
+        } while (choice != 'a' && choice != 'A' && choice != 'b' && choice != 'B' && choice != 'C' && choice != 'c' && choice != 'D' && choice != 'd');
     }
     
     switch(choice)
