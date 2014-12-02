@@ -24,7 +24,6 @@ show the array.
 using std::cout;
 using std::endl;
 using std::cin;
-using std::reverse;
 
 const int size = 5;
 
