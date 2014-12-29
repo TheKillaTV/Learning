@@ -48,7 +48,7 @@ void InputArray(int arr[], int size)
 
 void OutputArray(const int arr[], int size)
 {
-	int temp, temp2 = 0, most = 0, least = 0;
+	int temp = 99999, temp2 = 0, most = 0, least = 0;
 	for (int i = 1; i < size; i++)
 	{
 		if (arr[i] < temp)
