@@ -97,7 +97,7 @@ void Board::SetEnemiesAndTraps(char board[][Column])
 			cout << "Can't randomly put enemy at CORDS [" << x << "][" << y << "] because an enemy, treasure, or player is already there! Generating a new spot..." << endl;
 			x = rand() % 8 + 1;
 			y = rand() & 5 + 1;
-			continue;
+			//continue; This is not neccessary
 		}
 		
 		if (i < 3)
