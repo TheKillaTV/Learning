@@ -87,14 +87,14 @@ void Connect4::PutPlayerOnePiece()
 
 void Connect4::PlayerTwoTurn()
 {
-	p2turn = rand() % 6 + 0;
+	p2turn = rand() % 7 + 0;
 
 	for (int i = 6; i >= 0; i--)
 	{
 		if (arr[0][p2turn] == p1 || arr[0][p2turn] == p2)
 		{
 			//cout << "Computer selected a filled column. Picking a new one " << endl;
-			p2turn = rand() % 6 + 0;
+			p2turn = rand() % 7 + 0;
 			i++;
 		}
 		else if (arr[i][p2turn] == p1 || arr[i][p2turn] == p2)
