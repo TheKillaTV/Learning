@@ -109,6 +109,8 @@ void Connect4::PlayerTwoTurn()
 
 void Connect4::ScanBoard()
 {
+	Pieces = 0; // Reset
+	
 	for (int i = 0; i < Row; i++)
 	{
 		for (int j = 0; j < Column; j++)
