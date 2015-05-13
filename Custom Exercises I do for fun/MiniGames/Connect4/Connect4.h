@@ -13,6 +13,7 @@ public:
 	Connect4();
 	static int x;
 	static int y;
+	static int Pieces;
 	static bool PlayerPiece;
 	static int Winner;
 	void PrintBoard();
