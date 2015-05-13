@@ -10,6 +10,7 @@ bool Connect4::PlayerPiece = 0;
 int Connect4::x = 0;
 int Connect4::y = 0;
 int Connect4::Winner = 0; 
+int Connect4::Pieces = 0;
 
 Connect4::Connect4()
 {
