@@ -48,6 +48,6 @@ int main()
 			Test.PrintBoard();
 			cout << "Player 2 wins! " << endl;
 			break;
-		}
+		} 
 	}
 }
