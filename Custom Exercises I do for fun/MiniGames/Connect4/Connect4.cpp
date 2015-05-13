@@ -154,7 +154,7 @@ void Connect4::WinnerAlgorithm()
 
 		// Diagonal check in all directions
 
-		else if (arr[x][y] == p1 && arr[x - 1][y + 1] == p1	&& arr[x - 2][y + 2] == p1 && arr[x - 3][y + 3] == p1 || arr[x][y] == p1 
+		else if (arr[x][y] == p1 && arr[x - 1][y + 1] == p1 && arr[x - 2][y + 2] == p1 && arr[x - 3][y + 3] == p1 || arr[x][y] == p1 
 			&& arr[x + 1][y + 1] == p1 && arr[x + 2][y + 2] == p1 && arr[x + 3][y + 3] == p1)
 		{
 			//cout << "Player 1 Wins! (DIAGONALLY)" << endl;
@@ -175,8 +175,8 @@ void Connect4::WinnerAlgorithm()
 
 		// Diagonal check in all directions
 
-		else if (arr[x][y] == p2 && arr[x - 1][y + 1] == p2	&& arr[x - 2][y + 2] == p2 && arr[x - 3][y + 3] == p2 || arr[x][y] == p2 
-				&& arr[x + 1][y + 1] == p2 && arr[x + 2][y + 2] == p2 && arr[x + 3][y + 3] == p2)
+		else if (arr[x][y] == p2 && arr[x - 1][y + 1] == p2 && arr[x - 2][y + 2] == p2 && arr[x - 3][y + 3] == p2 || arr[x][y] == p2 
+			&& arr[x + 1][y + 1] == p2 && arr[x + 2][y + 2] == p2 && arr[x + 3][y + 3] == p2)
 		{
 			//cout << "Player 2 Wins! (DIAGONALLY)" << endl;
 			Winner++;
