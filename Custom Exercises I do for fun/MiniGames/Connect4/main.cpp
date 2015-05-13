@@ -49,7 +49,5 @@ int main()
 			cout << "Player 2 wins! " << endl;
 			break;
 		}
-
-		cout << "Total pieces: " << Test.Pieces << "." << endl;
 	}
 }
