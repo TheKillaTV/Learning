@@ -53,7 +53,7 @@ void BinaryToDecimal(int arr[], int size)
 {
 	int total = 0, temp = 0;
 
-	for (int i = 1, j = size - 1; j >= 0; j--, i *= 2)
+	for (int i = 1, j = size - 1; j >= 0; j--, i *= 2) // j starts at the end of the array because binary is read from right to left
 	{
 		temp = arr[j] * i;
 
