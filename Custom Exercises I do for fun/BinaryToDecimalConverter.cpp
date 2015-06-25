@@ -21,6 +21,8 @@ int main()
 
 	CopyStringToArray(input, arr, input.size());
 	BinaryToDecimal(arr, input.size());
+	
+	delete arr;
 }
 
 void BinaryToDecimal(int arr[], int size)
