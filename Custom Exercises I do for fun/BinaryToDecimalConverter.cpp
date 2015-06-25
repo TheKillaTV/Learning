@@ -2,51 +2,25 @@
 
 #include "stdafx.h"
 #include <iostream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
-void SetValuesToZero(int arr[], int size);
-void GetUserInput(int arr[], int size);
+void CopyStringToArray(string & input, int arr[], int size);
 void BinaryToDecimal(int arr[], int size);
 
 int main()
 {
-	int size = 0;
-	cout << "How many 1 or 0's? ";
-	cin >> size;
+	string input;
 
-	int * t = new int[size];
+	cout << "Enter binary numbers to convert from binary to decimal: ";
+	getline(cin, input);
 
-	SetValuesToZero(t, size);
-	GetUserInput(t, size);
-	BinaryToDecimal(t, size);
+	int * arr = new int[input.size()];
 
-	delete t;
-}
-
-void SetValuesToZero(int arr[], int size)
-{
-	for (int i = 0; i < size; i++)
-		arr[i] = 0;
-}
-
-void GetUserInput(int arr[], int size)
-{
-	cout << "Enter a 1 or 0, then hit enter. Repeat until size is filled ";
-
-	for (int i = 0; i < size; i++)
-	{
-		cin >> arr[i];
-	}
-
-	cout << "Binary value: ";
-
-	for (int i = 0; i < size; i++)
-	{
-		cout << arr[i];
-	}
-
-	cout << endl;
+	CopyStringToArray(input, arr, input.size());
+	BinaryToDecimal(arr, input.size());
 }
 
 void BinaryToDecimal(int arr[], int size)
@@ -61,4 +35,12 @@ void BinaryToDecimal(int arr[], int size)
 	}
 
 	cout << "Decimal value: " << total << endl;
+}
+
+void CopyStringToArray(string & input, int arr[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = input[i] - '0';
+	}	
 }
