@@ -110,6 +110,7 @@ void Game::Attack(char move)
 		break;
 	default:
 		cout << "None picked. Picked Moderate damage move" << endl;
+		//cout << "COMPUTER PICKED: " << (int)move << endl;
 		MoveOne();
 		break;
 	}
@@ -122,13 +123,13 @@ void Game::MoveOne()
 
 	if (turn % 2 != 0)
 	{
-		cout << "You hit CPU for " << damage << " damage!" << endl;
+		cout << "You hit CPU for " << damage << " damage! (Moderate Attack) " << endl;
 		SetChealth(Chealth - damage);
 	}
 
 	else
 	{
-		cout << "CPU hits you for " << damage << " damage!" << endl;
+		cout << "CPU hits you for " << damage << " damage! (Moderate Attack)" << endl;
 		SetHealth(health - damage);
 	}
 
@@ -140,13 +141,13 @@ void Game::MoveTwo()
 
 	if (turn % 2 != 0)
 	{
-		cout << "You hit CPU for " << damage << " damage!" << endl;
+		cout << "You hit CPU for " << damage << " damage! (Light to Heavy Attack)" << endl;
 		SetChealth(Chealth - damage);
 	}
 
 	else
 	{
-		cout << "CPU hits you for " << damage << " damage!" << endl;
+		cout << "CPU hits you for " << damage << " damage! (Light to Heavy Attack)" << endl;
 		SetHealth(health - damage);
 	}
 }
@@ -159,7 +160,7 @@ void Game::MoveThree()
 	{
 		if (health <= 35)
 		{
-			int crit = rand() % 15 + 10;
+			int crit = rand() % 5 + 10;
 			cout << "You healed yourself for " << heal << " health + an extra " << crit << " health!" << endl;
 			SetHealth(health += heal + crit);
 
@@ -169,7 +170,7 @@ void Game::MoveThree()
 
 		else
 		{
-			cout << "You healed yourself for " << heal << "health!" << endl;
+			cout << "You healed yourself for " << heal << " health!" << endl;
 			SetHealth(health += heal);
 
 			if (health > 100)
@@ -181,7 +182,7 @@ void Game::MoveThree()
 	{
 		if (Chealth <= 35)
 		{
-			int crit = rand() % 15 + 10;
+			int crit = rand() % 5 + 10;
 			cout << "CPU healed itself for " << heal << " health + an extra " << crit << " health!" << endl;
 			SetChealth(Chealth += heal + crit);
 
@@ -203,7 +204,7 @@ void Game::MoveThree()
 void Game::PrintOptions()
 {
 	cout << "A. Moderate Damage " << endl;
-	cout << "B. High or Low Damage " << endl;
+	cout << "B. Light to Heavy Damage " << endl;
 	cout << "C. Heal Self" << endl << endl;
 }
 
@@ -212,7 +213,7 @@ void Game::SetMove(char move)
 	if (turn % 2 != 0)
 		cin >> this->move;
 	else
-		this->move = options[rand() % sizeof(options)];
+		this->move = options[rand() % 3];
 }
 
 void Game::PrintFinalStats()
