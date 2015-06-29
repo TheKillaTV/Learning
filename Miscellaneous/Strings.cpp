@@ -59,7 +59,7 @@ int main()
 	cout << "A. Enter a string: " << endl;
 	cout << "B. Generate a string " << endl;
 	cin >> *temp;
-	cin.ignore(); // Crashes without this because it leaves a newline in the input buffer
+	cin.ignore(); // Crashes without this because cin leaves a newline in the input buffer
 
 	if (t->IsUpper(*temp))
 		*temp = t->ToLower(*temp);
