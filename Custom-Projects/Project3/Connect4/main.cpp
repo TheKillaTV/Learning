@@ -11,6 +11,7 @@ using namespace std;
 
 int main()
 {
+	srand(time(NULL));
 	Connect4 * Test = new Connect4();
 
 	while (true)
