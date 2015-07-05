@@ -20,7 +20,7 @@ int main()
 
 		if (Test->GetTurnCount() >= 49)
 		{
-			//cout << "Draw! Nobody Wins! " << endl;
+			cout << "Draw! Nobody Wins! " << endl;
 			break;
 		}
 
