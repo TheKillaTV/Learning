@@ -124,8 +124,6 @@ std::string KikBot::CreateDate()
 	GetLocalTime(&Info);
 	std::string Suffix;
 
-	Info.wHour = 23;
-
 	if (Info.wHour > 12)
 	{
 		Info.wHour -= 12;
