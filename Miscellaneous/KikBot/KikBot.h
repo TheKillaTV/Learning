@@ -21,7 +21,7 @@ public:
 	void SwitchToBlueStacks(HWND Bluestacks);
 	std::string GetMessageCountString() const;
 	std::string GetMessageString() const;
-	std::string KikBot::GetDateString() const;
+	std::string GetDateString() const;
 	std::string ConvertNumberToString(unsigned int MessageCount);
 	std::string GetMessageCountInfo() const;
 	std::string GetAuthorString() const;
