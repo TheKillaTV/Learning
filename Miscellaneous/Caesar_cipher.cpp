@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+// My implementation of Caesar cipher encryption 
+
 std::string EncryptString(std::string UserInput);
 
 int main()
