@@ -7,8 +7,6 @@
 
 #ifdef _WIN32
 
-#define VK_V 0x56
-
 class Keyboard
 {
 public:
