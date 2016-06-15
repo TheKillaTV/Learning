@@ -1,8 +1,11 @@
 #include "CodinBot.h"
+#include "Sqlite3CPP.h"
+#include "Keyboard.h"
+#include "Clipboard.h"
+#include "CodinBotGUI.h"
 
-CodinBot::CodinBot()
+CodinBot::CodinBot(): m_Error(0)
 {
-
 }
 
 
@@ -11,88 +14,38 @@ CodinBot::~CodinBot()
 
 }
 
+#ifdef _WIN32
 void CodinBot::CopyStringToClipboard(const std::string & Message) const
 {
-	if (OpenClipboard(NULL))
+	Clipboard Clip;
+
+	if (Clip.Open())
 	{
-		HGLOBAL hg = GlobalAlloc(GMEM_MOVEABLE, Message.length());
+		Clip.SetText(Message);
+	}
 
-		if (!hg)
-		{
-			return;
-		}
-
-		memcpy(GlobalLock(hg), Message.c_str(), Message.length());
-		GlobalUnlock(hg);
-		SetClipboardData(CF_TEXT, hg);
-		CloseClipboard();
-		GlobalFree(hg);
+	else
+	{
+		Clip.PrintLastError();
 	}
 }
 
 std::string CodinBot::GrabStringFromClipboard()
 {
-	if (OpenClipboard(NULL))
+	Clipboard Clip;
+
+	if (Clip.Open())
 	{
-		HANDLE Clipboard = GetClipboardData(CF_TEXT);
-
-		const char * Clip = (const char*)Clipboard;
-
-		if (Clip)
-		{
-			ClipboardText = Clip;
-		}
+		m_ClipboardText = Clip.GetText();
 	}
 
-	CloseClipboard();
+	else
+	{
+		Clip.PrintLastError();
+	}
 
-	return ClipboardText;
+	return m_ClipboardText;
 }
-
-std::string CodinBot::GetLatestMessage()
-{
-	ADBpull();
-	const std::string kikDatabase = "kikDatabase.db";
-	const std::string Query = "SELECT * FROM messagesTable ORDER BY _id DESC LIMIT 1";
-	int rc = 0;
-
-	rc = sqlite3_open(kikDatabase.c_str(), &db);
-
-	if (rc)
-	{
-		return "Failed to open kikDatabase.db!";
-	}
-
-	if (sqlite3_prepare_v2(db, Query.c_str(), -1, &statement, NULL) == SQLITE_OK)
-	{
-		if (sqlite3_step(statement) == SQLITE_ROW)
-		{
-			const char * msg = (const char*)sqlite3_column_text(statement, sqlite3_column_count(statement) - 18);
-			const char * is_bot = (const char*)sqlite3_column_text(statement, sqlite3_column_count(statement) - 16);
-
-			if (msg)
-			{
-				Message = msg;
-			}
-
-			if (*is_bot == '1')
-			{
-				IsCodinBotsMessage = true;
-			}
-
-			else
-			{
-				IsCodinBotsMessage = false;
-			}
-		}
-	}
-
-	sqlite3_finalize(statement);
-	sqlite3_close(db);
-
-	return Message;
-}
-
 
 void CodinBot::BotSleep(const unsigned int Delay) const
 {
@@ -118,9 +71,9 @@ bool CodinBot::SearchForBlueStacks()
 			{
 				if (!strcmp(pe32.szExeFile, Bluestacks.c_str()))
 				{
-					ProcessID = pe32.th32ProcessID;
+					m_ProcessID = pe32.th32ProcessID;
 					Found = true;
-					IsUsingBluestacks = Found;
+					m_IsUsingBluestacks = Found;
 					break;
 				}
 			}
@@ -134,49 +87,39 @@ bool CodinBot::SearchForBlueStacks()
 
 void CodinBot::TypeMessageToChat(const std::string & Message, const unsigned int Delay) const
 {
-	for (int i = 0; i < Message.length(); i++)
+	Keyboard Key;
+	Key.Type_Message_v1(Message, Delay);
+}
+
+void CodinBot::SendMessageToChat() const
+{
+	Keyboard Key;
+	Key.Simulate_Enter_Key();
+}
+
+void CodinBot::SwitchToBluestacks_v1()
+{
+	m_Bluestacks = FindWindow(NULL, "Bluestacks App Player");
+
+	if (!m_Bluestacks)
 	{
-		if (IsSpecialLetter(Message.at(i)))
-		{
-			keybd_event(VK_LSHIFT, MapVirtualKey(VK_LSHIFT, MAPVK_VK_TO_VSC), NULL, NULL);
-			keybd_event(VkKeyScan(Message[i]), MapVirtualKey(VkKeyScan(Message[i]), MAPVK_VK_TO_VSC), NULL, NULL);
-			keybd_event(VkKeyScan(Message[i]), MapVirtualKey(VkKeyScan(Message[i]), MAPVK_VK_TO_VSC), KEYEVENTF_KEYUP, NULL);
-			keybd_event(VK_LSHIFT, MapVirtualKey(VK_LSHIFT, MAPVK_VK_TO_VSC), KEYEVENTF_KEYUP, NULL);
-		}
-
-		else
-		{
-			keybd_event(VkKeyScan(Message[i]), MapVirtualKey(VkKeyScan(Message[i]), MAPVK_VK_TO_VSC), NULL, NULL);
-			keybd_event(VkKeyScan(Message[i]), MapVirtualKey(VkKeyScan(Message[i]), MAPVK_VK_TO_VSC), KEYEVENTF_KEYUP, NULL);
-		}
+		m_Error = 3;
+		MessageBox(NULL, "Bluestacks not found!", NULL, MB_OK);
+		return;
 	}
-	
-	BotSleep(Delay);
-}
 
-void CodinBot::SendMessageToChat()
-{
-	keybd_event(VK_RETURN, MapVirtualKey(VK_RETURN, MAPVK_VK_TO_VSC), NULL, NULL);
-	keybd_event(VK_RETURN, MapVirtualKey(VK_RETURN, MAPVK_VK_TO_VSC), KEYEVENTF_KEYUP, NULL);
-}
-
-std::string CodinBot::GetCurrentDate()
-{
-	std::time_t CurrentTime = std::time(NULL);
-	const std::string Date = std::ctime(&CurrentTime);
-	return Date;
-}
-
-void CodinBot::MaximizeBlueStacks() const
-{
+	SwitchToThisWindow(m_Bluestacks, TRUE);
 
 	// TO DO: Find window via process ID. May have to use this EnumWindow() function: https://msdn.microsoft.com/en-us/library/windows/desktop/ms633497(v=vs.85).aspx
-
-	if (IsUsingBluestacks)
-	{
-		std::cout << "This function is not finished" << std::endl;
-	}
 }
+
+void CodinBot::Paste() const
+{
+	Keyboard Key;
+	Key.Simulate_Ctrl_V();
+}
+
+#endif
 
 bool CodinBot::IsSpecialLetter(const char Letter) const
 {
@@ -200,3 +143,101 @@ void CodinBot::ADBpull() const
 	const std::string AdbPullCommand = "adb pull /data/data/kik.android/databases/kikDatabase.db";
 	system(AdbPullCommand.c_str());
 }
+
+void CodinBot::LoadCommandsFromFile(const std::string & FileName)
+{
+	std::fstream fin;
+	std::string Command;
+
+	fin.open(FileName.c_str());
+
+	if (fin.is_open())
+	{
+		while (std::getline(fin, Command))
+		{
+			if (Command.at(0) == '#')
+			{
+				Command.erase(0, 1);
+				m_CommandsList.push_back(Command);
+			}
+
+			else if (Command.at(0) == '-')
+			{
+				Command.erase(0, 1);
+				m_CommandsDescription.push_back(Command);
+			}
+		}
+	}
+
+	else
+	{
+		m_Error = 1;
+	}
+
+	fin.close();
+}
+
+std::string CodinBot::GetLatestMessage()
+{
+	ADBpull();
+	Sqlite3CPP sqlite3;
+
+	if (sqlite3.Open("kikDatabase.db"))
+	{
+		if (sqlite3.Query("SELECT * FROM messagesTable ORDER BY _id DESC LIMIT 1"))
+		{
+			if (sqlite3.Step())
+			{
+				std::string msg = sqlite3.GetColumnText(18);
+				std::string isbot = sqlite3.GetColumnText(16);
+
+				if (!msg.empty())
+				{
+					m_Message = msg;
+				}
+
+				if (!isbot.empty() && isbot == "1")
+				{
+					m_IsCodinBotsMessage = true;
+				}
+			}
+		}
+	}
+
+	return m_Message;
+}
+
+
+std::string CodinBot::GetCurrentDate() const
+{
+	std::time_t CurrentTime = std::time(NULL);
+	const std::string Date = std::ctime(&CurrentTime);
+	return Date;
+}
+
+// 1 = Failed to open .txt file
+// 2 = Failed to open Databasefile
+// 3 = Failed to find Bluestacks
+unsigned int CodinBot::GetLastCodinBotError() const
+{
+	return m_Error;
+}
+
+void CodinBot::PrintError(const unsigned int Error)
+{
+	switch (Error)
+	{
+	case 1:
+		std::cout << "Failed to open Filename in function: LoadCommandsFromFile(const std::string & Filename)" << std::endl;
+		break;
+	case 2:
+		std::cout << "Failed to open sqlite3 database file in function: std::string GetLatestMessage()" << std::endl;
+		break;
+	case 3:
+		std::cout << "Failed to find Bluestacks in function: void SwitchToBluestacks_v1()" << std::endl;
+		break;
+	default:
+		break;
+	}
+}
+
