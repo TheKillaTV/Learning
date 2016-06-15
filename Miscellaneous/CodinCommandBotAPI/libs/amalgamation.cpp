@@ -1,4 +1,4 @@
-#include "WrapperFunctions.h"
+#include "amalgamation.h"
 
 #ifdef _WIN32
 CodinBotGUI::CodinBotGUI(HINSTANCE hInstance, int nCmdShow) : m_hInstance(hInstance), m_nCmdShow(nCmdShow), m_Window(NULL), m_Error(0)
