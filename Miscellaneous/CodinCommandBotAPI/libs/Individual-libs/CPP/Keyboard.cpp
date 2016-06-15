@@ -12,45 +12,6 @@ Keyboard::~Keyboard()
 
 }
 
-/*void Keyboard::Type_Message_v2(const std::string & Message)
-{
-	for (int i = 0; i < Message.length(); i++)
-	{
-		if (IsSpecialLetter(Message.at(i)))
-		{
-			INPUT input = { 0 };
-			input.type = INPUT_KEYBOARD;
-			input.ki.wVk = VK_LSHIFT;
-			input.ki.wScan = MapVirtualKey(VK_LSHIFT, MAPVK_VK_TO_VSC);
-			Events.push_back(input);
-
-			//input.ki.wVk = VkKeyScan(Message.at(i));
-			//input.ki.wScan = MapVirtualKey(input.ki.wVk, MAPVK_VK_TO_VSC);
-			//Events.push_back(input);
-			//input.ki.dwFlags = KEYEVENTF_KEYUP;
-			//Events.push_back(input);
-
-			//input.ki.wScan = MapVirtualKey(Message.at(i), MAPVK_VK_TO_VSC);
-			
-		}
-
-
-		/*else
-		{
-			INPUT input = { 0 };
-			input.type = INPUT_KEYBOARD;
-			input.ki.wVk = VkKeyScan(Message.at(i));
-			input.ki.wScan = MapVirtualKey(input.ki.wVk, MAPVK_VK_TO_VSC);
-			Events.push_back(input);
-		}
-		
-	}
-
-	SendInput(Events.size(), &Events[0], sizeof(INPUT));
-
-}
-*/
-
 void Keyboard::Type_Message_v1(const std::string & Message, const unsigned int Delay) const
 {
 	for (int i = 0; i < Message.length(); i++)
