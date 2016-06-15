@@ -1,16 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <Windows.h>
-#include <TlHelp32.h>
-#include <cstring>
-#include <sqlite3.h>
-#include <ctime>
-
-#define WIN32_LEAN_AND_MEAN
-
 #ifndef CODINBOT_H
 #define CODINBOT_H
 
@@ -23,26 +12,32 @@ public:
 	void CopyStringToClipboard(const std::string & Message) const;
 	void BotSleep(const unsigned int Delay) const;
 	bool SearchForBlueStacks();
-	void MaximizeBlueStacks() const;
-	void SendMessageToChat();
+	void SwitchToBluestacks_v1();
+	void SendMessageToChat() const;
+	void LoadCommandsFromFile(const std::string & FileName);
+	void Paste() const;
 	std::string GetLatestMessage();
 	std::string GrabStringFromClipboard();
-	std::string GetCurrentDate();
+	std::string GetCurrentDate() const;
+	unsigned int GetLastCodinBotError() const;
+	void PrintError(const unsigned int Error);
 
 private:
 	bool IsSpecialLetter(const char Letter) const;
 	void ADBpull() const;
-	unsigned int Delay;
-	bool IsUsingBluestacks;
-	bool IsCodinBotsMessage;
-	std::string Message;
-	std::string ClipboardText;
-	std::vector<std::string> CommandsList;
-	DWORD ProcessID;
-	sqlite3 * db; // For database handling
-	sqlite3_stmt * statement;
+	unsigned int m_Delay;
+	bool m_IsUsingBluestacks;
+	bool m_IsCodinBotsMessage;
+	std::string m_Message;
+	std::string m_ClipboardText;
+	std::vector<std::string> m_CommandsList;
+	std::vector<std::string> m_CommandsDescription;
+	unsigned int m_Error;
+	DWORD m_ProcessID;
+	HWND m_Bluestacks;
 
 };
+
 
 #endif
 
