@@ -27,6 +27,11 @@
 #include <fstream>
 #include <sqlite3.h>
 
+
+/*
+
+Not gonna bother with GUI for now.
+
 #ifndef CODINBOTGUI_H
 #define CODINBOTGUI_H
 
@@ -58,6 +63,8 @@ private:
 	DWORD m_Error;
 };
 #endif
+*/
+
 
 // A small wrapper class for sqlite3 specifically for the kik bot . Will make future kik bot projects easier.
 
@@ -77,6 +84,7 @@ public:
 
 
 private:
+	bool m_IsOpen;
 	sqlite3 * m_db;
 	sqlite3_stmt * m_statement;
 	std::string m_ErrorMessage;
