@@ -21,6 +21,7 @@ public:
 	
 
 private:
+	bool m_IsOpen;
 	sqlite3 * m_db;
 	sqlite3_stmt * m_statement;
 	std::string m_ErrorMessage;
