@@ -1,5 +1,6 @@
 #include "amalgamation.h"
 
+/*
 #ifdef _WIN32
 CodinBotGUI::CodinBotGUI(HINSTANCE hInstance, int nCmdShow) : m_hInstance(hInstance), m_nCmdShow(nCmdShow), m_Window(NULL), m_Error(0)
 {
@@ -132,6 +133,7 @@ HWND CodinBotGUI::Createbutton(int x, int y, int nWidth, int nHeight) const
 }
 
 #endif
+*/
 
 #ifdef _WIN32
 Keyboard::Keyboard()
